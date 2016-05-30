@@ -1,0 +1,72 @@
+#! /bin/bash
+
+for file in $(ls *.h)
+do
+        ci $file
+done
+
+for file in $(ls *.c)
+do
+        ci $file
+done
+
+
+for file in $(ls *.h,v)
+do
+        co $file
+done
+
+for file in $(ls *.c,v)
+do
+        co $file
+done
+
+insert()
+{
+	read -p "Do you want to insert the module y/n" res
+	if [ $res = 'y' ]
+	then 
+		insmod ./modules/drv.ko 
+		read
+		lsmod
+		read
+		cat /proc/devices
+		read
+		dmesg
+		read
+		rmmod drv
+		read
+		cat /proc/devices
+		read  
+		lsmod
+		read
+		dmesg
+	fi
+	edit
+
+}
+edit()
+{
+	read -p "Do you want to further edit the program(y/n)" res
+	if [ $res = 'y' ]
+	then
+		for file in $(ls *.h,v)
+		do
+		        co -l $file
+		done
+		
+		for file in $(ls *.c,v)
+		do
+		        co -l $file
+		done
+	fi
+
+}
+
+if ( make )
+then
+	insert $1
+else
+	edit
+fi
+

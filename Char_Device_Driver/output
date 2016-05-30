@@ -1,0 +1,7 @@
+make -C /lib/modules/4.2.0-36-generic/build M=/root/modules modules
+make[1]: Entering directory '/usr/src/linux-headers-4.2.0-36-generic'
+  CC [M]  /root/modules/init.o
+scripts/Makefile.build:258: recipe for target '/root/modules/init.o' failed
+Makefile:1398: recipe for target '_module_/root/modules' failed
+make[1]: Leaving directory '/usr/src/linux-headers-4.2.0-36-generic'
+Makefile:11: recipe for target 'default' failed
