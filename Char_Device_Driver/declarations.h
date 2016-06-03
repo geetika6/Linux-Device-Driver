@@ -16,4 +16,5 @@ struct skull_qset {
     struct skull_qset *next;
 };
 extern struct skull_qset *qset;
-extern int nod;
+int dev_open(struct inode *,struct file *);
+int dev_release(struct inode *,struct file *);

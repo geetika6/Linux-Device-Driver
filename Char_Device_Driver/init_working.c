@@ -1,22 +1,16 @@
 #include "header.h"
 #include "declarations.h"
-#include "file_opr.h"
 
-dev_t dev_id,dev_no;
+dev_t dev_id;
 int majorno,minorno;
 int ret;
 int nod=1;
-int minorno=0;
-//struct skull_dev *dev;
 struct skull_dev *dev;
-
 //const struct file_operations *fops={};
-//const struct file_operations *fops;
+const struct file_operations *fops;
 int err=0;
-module_param(nod,int,0);	
 static int __init start_module(void)
-{   
-    int i=0;
+{
     printk(KERN_INFO "Hello world \n");
     ret=alloc_chrdev_region(&dev_id,minorno,nod,DEVNAME);
     majorno=MAJOR(dev_id);
@@ -26,31 +20,27 @@ static int __init start_module(void)
 	printk(KERN_ALERT "alloc_chrdev_region not successful");
         goto OUT;
     }
-    dev=kmalloc(nod*sizeof(struct skull_dev),S_IRUGO);
+    dev=kmalloc(sizeof(struct skull_dev),S_IRUGO);
     if (dev==NULL)
     {   
 	printk(KERN_ALERT "kmalloc not successful");
         goto OUT;
     }
-    memset(dev, 0, sizeof(struct skull_dev)*nod);
-    //for(i=0;i++;i<nod)
-    while(i<nod)
-    {    
-         dev_no=MKDEV(majorno,i);
+    memset(dev, 0, sizeof(struct skull_dev));
+   // for(int i=0;i++;i<nod)
+   // {    
+         //dev_no=MKDEV(majorno,minorno);
          //struct cdev *my_cdev=cdev_alloc();
-         cdev_init(&(dev[i].cdev),&fops);
-         dev[i].cdev.owner=THIS_MODULE;
-         dev[i].cdev.ops=&fops;
-         printk(KERN_INFO "minor dev_id = %d",i);
-         printk(KERN_INFO "add of dev[i] = %p",dev+i);
-         err=cdev_add(&dev[i].cdev,dev_no,nod);
+         cdev_init(&dev->cdev,fops);
+         dev->cdev.owner=THIS_MODULE;
+         dev->cdev.ops=fops;
+         err=cdev_add(&dev->cdev,dev_id,1);
          if (err<0)
          {   
              printk(KERN_ALERT "cdev_add not successful for dev_id=%d ",dev_id);
              goto OUT;
          }
-         i=i+1;
-    }
+    //}
      return 0;
 OUT: return -1;   
 }

@@ -1,0 +1,21 @@
+#include </root/modules/header.h>
+#include </root/modules/declarations.h>
+
+dev_t dev_id;
+int majorno,minorno,nod;
+int ret;
+static int __init start_module(void)
+{
+    printk(KERN_INFO "Hello world \n");
+    ret=alloc_chrdev_region(&dev_id,minorno,nod,DEVNAME);
+    printk(KERN_INFO "dev_id = %d",dev_id);
+    if (ret<0)
+    {   
+	printk(KERN_ALERT "alloc_chrdev region not successful");
+        goto OUT;
+    }
+
+     return 0;
+OUT: return 1;   
+}
+module_init(start_module);
