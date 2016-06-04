@@ -1,6 +1,6 @@
 #include "header.h"
 #include "declarations.h"
-//struct skull_dev *dev;
+//struct scull_dev *dev;
 static void __exit exit_module(void)
 {
    int i=0;

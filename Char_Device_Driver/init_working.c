@@ -5,7 +5,7 @@ dev_t dev_id;
 int majorno,minorno;
 int ret;
 int nod=1;
-struct skull_dev *dev;
+struct scull_dev *dev;
 //const struct file_operations *fops={};
 const struct file_operations *fops;
 int err=0;
@@ -20,13 +20,13 @@ static int __init start_module(void)
 	printk(KERN_ALERT "alloc_chrdev_region not successful");
         goto OUT;
     }
-    dev=kmalloc(sizeof(struct skull_dev),S_IRUGO);
+    dev=kmalloc(sizeof(struct scull_dev),S_IRUGO);
     if (dev==NULL)
     {   
 	printk(KERN_ALERT "kmalloc not successful");
         goto OUT;
     }
-    memset(dev, 0, sizeof(struct skull_dev));
+    memset(dev, 0, sizeof(struct scull_dev));
    // for(int i=0;i++;i<nod)
    // {    
          //dev_no=MKDEV(majorno,minorno);
