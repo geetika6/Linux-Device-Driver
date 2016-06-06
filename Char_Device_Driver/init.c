@@ -4,6 +4,7 @@
 
 dev_t dev_id,dev_no;
 int majorno,minorno;
+int devicesize,datasize,quantumsize,qsetsize;
 int ret;
 int nod=1;
 int minorno=0;
@@ -17,6 +18,10 @@ module_param(nod,int,0);
 static int __init start_module(void)
 {   
     int i=0;
+    devicesize=DEVICESIZE;
+    datasize=DATASIZE;
+    qsetsize=QSETSIZE;
+    quantumsize=QUANTUMSIZE;
     printk(KERN_INFO "Hello world \n");
     ret=alloc_chrdev_region(&dev_id,minorno,nod,DEVNAME);
     majorno=MAJOR(dev_id);
@@ -41,6 +46,10 @@ static int __init start_module(void)
          cdev_init(&(dev[i].cdev),&fops);
          dev[i].cdev.owner=THIS_MODULE;
          dev[i].cdev.ops=&fops;
+         dev[i].devicesize=devicesize;
+         dev[i].datasize=datasize;
+         dev[i].qsetsize=qsetsize;
+         dev[i].quantumsize=quantumsize;
          printk(KERN_INFO "minor dev_id = %d",i);
          printk(KERN_INFO "add of dev[i] = %p",dev+i);
          err=cdev_add(&dev[i].cdev,dev_no,nod);
