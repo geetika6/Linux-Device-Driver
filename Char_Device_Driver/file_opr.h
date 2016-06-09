@@ -4,6 +4,7 @@ struct file_operations fops=
     //.release=dev_release
     open:dev_open,
     release:dev_release,
-    write:dev_write
+    write:dev_write,
+    read:dev_read
 
 } ;

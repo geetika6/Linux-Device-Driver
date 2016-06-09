@@ -12,10 +12,14 @@ int operation(int choice , int wfd)
                    break;
             case 3:
                    printf("choice 3");
-                   releas_device(wfd);
+                   read_device();
                    break;
             case 4:
                    printf("choice 4");
+                   releas_device(wfd);
+                   break;
+            case 5:
+                   printf("choice 5");
                    exit(EXIT_SUCCESS);
                    
         }

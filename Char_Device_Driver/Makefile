@@ -1,7 +1,8 @@
 INSTALLDIR= modules
 ifneq ($(KERNELRELEASE),)
 	obj-m := drv.o
-	drv-objs := init.o exit.o dev_open.o dev_release.o trim_dev.o creat_scull.o dev_write.o
+	drv-objs := init.o exit.o dev_open.o dev_release.o trim_dev.o creat_scull.o creat_sqset.o dev_write.o dev_read.o
+
 
 else
 	KERNDIR ?= /lib/modules/$(shell uname -r)/build

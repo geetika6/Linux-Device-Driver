@@ -9,5 +9,6 @@ extern int wfd;
 
 int open_device ();
 int write_device (int);
+int read_device ();
 int releas_device (int);
 int operation (int,int);

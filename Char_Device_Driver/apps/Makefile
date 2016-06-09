@@ -1,5 +1,5 @@
-app:main.o operation.o open_device.o write_device.o  releas_device.o
-	gcc -Wall -o app main.o operation.o open_device.o write_device.o releas_device.o 
+app:main.o operation.o open_device.o write_device.o  releas_device.o read_device.o
+	gcc -Wall -o app main.o operation.o open_device.o write_device.o releas_device.o read_device.o
 
 main.o:main.c header.h
 	gcc -Wall -c main.c
@@ -15,6 +15,10 @@ write_device.o:write_device.c header.h
 
 releas_device.o:releas_device.c header.h 
 	gcc -Wall -c releas_device.c
+
+read_device.o:read_device.c header.h 
+	gcc -Wall -c read_device.c
+
 
 
 
