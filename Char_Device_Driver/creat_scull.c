@@ -8,7 +8,6 @@ struct scull_sqset * creat_scull(struct scull_dev *fdev,size_t size)
     struct scull_sqset *head =NULL;
     struct scull_sqset *curr = NULL;
     struct scull_sqset *ptr = NULL;
-    	struct scull_dev *ldev;
    //char desp[size_sqset];
     printk(KERN_INFO "Inside creat_scull");
     noi=size/(fdev->qsetsize *fdev->quantumsize);

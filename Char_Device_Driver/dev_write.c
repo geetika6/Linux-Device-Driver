@@ -8,7 +8,7 @@ ssize_t dev_write(struct file *filp,const char __user *ubuff,size_t size,loff_t 
    int notc,noctw,nocsw;
    //void **arr;
     struct scull_dev *ldev,*fdev;
-    struct scull_sqset *fqset;
+    struct scull_sqset *fqset,*lqset;
     int qset,quantum;
     //struct scull_sqset *sqset;
      nocsw=0;
@@ -32,13 +32,15 @@ ssize_t dev_write(struct file *filp,const char __user *ubuff,size_t size,loff_t 
    qset=ldev->qsetsize;
    quantum=ldev->quantumsize;
    ldev->sqset=creat_scull(ldev,size);
+   
    fdev=ldev;
+   lqset=ldev->sqset;
    fqset=ldev->sqset;
- //          printk(KERN_INFO "inside dev_write fdev.sqset.data add  recieved = %p \n",fqset);
- //  fqset=fqset->next;
- //          printk(KERN_INFO "inside dev_write fdev.sqset.data add next recieved = %p \n",fqset);
- //  fqset=fqset->next;
- //          printk(KERN_INFO "inside dev_write fdev.sqset.data add next next recieved = %p \n",fqset);
+           printk(KERN_INFO "inside dev_write lqset add  recieved = %p \n",lqset);
+   lqset=lqset->next;
+           printk(KERN_INFO "inside dev_write lqset data add next recieved = %p \n",lqset);
+   lqset=lqset->next;
+           printk(KERN_INFO "inside dev_write fqset add next next recieved = %p \n",lqset);
    if(!ldev->sqset)
    {
          printk(KERN_ERR "ldev-sqset not allocated memory");

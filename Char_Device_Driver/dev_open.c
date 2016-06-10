@@ -14,7 +14,7 @@ int dev_open(struct inode *inodep,struct file *filp)
          printk(KERN_ERR "ldev not valid dev_open");
     }
     filp->private_data=ldev;
-    if((filp->f_flags & O_ACCMODE)==O_WRONLY)
+    if(((filp->f_flags & O_ACCMODE)==O_WRONLY) && ldev->sqset!=NULL)
     {
          ret=trim_dev(ldev);
          if (ret <0)

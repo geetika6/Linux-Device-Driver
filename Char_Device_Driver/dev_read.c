@@ -9,6 +9,7 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
     size_t lsize;
     //void **arr;
     struct scull_dev *ldev;
+    struct scull_sqset *lqset;
     int qset,quantum;
     //struct scull_sqset *sqset;
     nocsr=0;
@@ -24,6 +25,14 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
     }
     lsize=ldev->datasize; 
     noctr=lsize;
+    qset=ldev->qsetsize;
+    quantum=ldev->quantumsize;
+    lqset=ldev->sqset;
+    if (lqset==NULL)
+    {
+        printk(KERN_INFO "Read call not possible since scull is not there");
+        goto OUT;
+    }
     printk(KERN_INFO "Inside dev_read value of noctr= %d",noctr);
     if (noctr>=ldev->devicesize ||lsize==0)
     {
@@ -32,15 +41,13 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
     //after pointing private data to the ldev, we need to create pointer from source to destination for transer of data
     //for this we need to use copy_to_user
     //
-    qset=ldev->qsetsize;
-    quantum=ldev->quantumsize;
     while (noctr)
     {
         if (noctr>quantum)
         {
             noctr=quantum ;
         }
-        notc=copy_to_user(ubuff+nocsr,ldev->sqset->data[i],noctr);
+        notc=copy_to_user(ubuff+nocsr,lqset->data[i],noctr);
        // printk(KERN_INFO "inside dev_read ,data =%s and ptr add  recieved = %p \n",(char*)*(ldev->sqset->data+i),*(ldev->sqset->data+i));
         if (notc)
         {  
@@ -52,7 +59,7 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
         i++;
         if (i==(ldev->qsetsize))
         {
-           ldev->sqset=ldev->sqset->next;
+           lqset=lqset->next;
            i=0;
         }
    } 
