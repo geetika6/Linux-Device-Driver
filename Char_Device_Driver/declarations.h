@@ -30,3 +30,5 @@ void ** creat_sqset(struct scull_dev *,struct scull_sqset *);
 struct scull_sqset * creat_scull(struct scull_dev *,size_t);
 ssize_t dev_write(struct file *,const char __user *,size_t ,loff_t *);
 ssize_t dev_read(struct file *,char __user *,size_t ,loff_t *);
+long dev_ioctl(struct file *, unsigned int, unsigned long);
+

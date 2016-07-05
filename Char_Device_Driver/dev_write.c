@@ -37,10 +37,6 @@ ssize_t dev_write(struct file *filp,const char __user *ubuff,size_t size,loff_t 
    lqset=ldev->sqset;
    fqset=ldev->sqset;
            printk(KERN_INFO "inside dev_write lqset add  recieved = %p \n",lqset);
-   lqset=lqset->next;
-           printk(KERN_INFO "inside dev_write lqset data add next recieved = %p \n",lqset);
-   lqset=lqset->next;
-           printk(KERN_INFO "inside dev_write fqset add next next recieved = %p \n",lqset);
    if(!ldev->sqset)
    {
          printk(KERN_ERR "ldev-sqset not allocated memory");

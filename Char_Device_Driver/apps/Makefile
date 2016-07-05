@@ -1,5 +1,5 @@
-app:main.o operation.o open_device.o write_device.o  releas_device.o read_device.o
-	gcc -Wall -o app main.o operation.o open_device.o write_device.o releas_device.o read_device.o
+app:main.o operation.o open_device.o write_device.o  releas_device.o read_device.o seek_device.o ioctl_menu.o ioctl_device.o
+	gcc -Wall -o app main.o operation.o open_device.o write_device.o releas_device.o read_device.o seek_device.o ioctl_menu.o ioctl_device.o
 
 main.o:main.c header.h
 	gcc -Wall -c main.c
@@ -18,6 +18,15 @@ releas_device.o:releas_device.c header.h
 
 read_device.o:read_device.c header.h 
 	gcc -Wall -c read_device.c
+
+ioctl_menu.o:ioctl_menu.c header.h 
+	gcc -Wall -c ioctl_menu.c
+
+ioctl_device.o:ioctl_device.c header.h ioctl.h 
+	gcc -Wall -c ioctl_device.c
+
+seek_device.o:seek_device.c header.h 
+	gcc -Wall -c seek_device.c
 
 
 
