@@ -64,7 +64,7 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
         }
    } 
 
-   return 0;
+   return nocsr;
 OUT:
      return -1;
 }

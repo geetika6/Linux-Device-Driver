@@ -65,7 +65,7 @@ ssize_t dev_write(struct file *filp,const char __user *ubuff,size_t size,loff_t 
    } 
   
 
-   return 0;
+   return nocsw;
 OUT:
      return -7;
 }

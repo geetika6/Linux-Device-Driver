@@ -10,17 +10,17 @@ int ioctl_device(int choice)
           case 1:
                 rfd=open(NODE,O_RDONLY);
                 ioctl(rfd,RESETDEVICE);
-                printf("the device is reset to its initial settings");
+                printf("the device is reset to its initial settings\n");
                 break;
           case 2:
                 rfd=open(NODE,O_RDONLY);
                 ioctl(rfd,GETREGSIZE,&arg);
-                printf("the reg size in device = %d",arg);
+                printf("the reg size in device = %d\n",arg);
                 break;
           case 3:
                 rfd=open(NODE,O_RDONLY);
                 ioctl(rfd,GETNOREG,&arg);
-                printf("the no of reg in device = %d",arg);
+                printf("the no of reg in device = %d\n",arg);
                 break;
           case 4:
                 wfd=open(NODE,O_WRONLY);
@@ -30,8 +30,8 @@ int ioctl_device(int choice)
                 break;
           case 5:
                 wfd=open(NODE,O_WRONLY);
-                printf("enter the no of reg to be set");
-                scanf("%d",&arg);
+                printf("enter the no of reg to be set\n");
+                scanf("%d\n",&arg);
                 ioctl(wfd,SETNOREG,&arg);
                 break;
       }	

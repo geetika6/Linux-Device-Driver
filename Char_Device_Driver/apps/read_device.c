@@ -17,6 +17,9 @@ int read_device(int rfd)
           scanf("%d",&origin);
           fpos=seek_device(rfd,offset,origin);
           printf("final position= %d \n",fpos);
+           count=read(rfd,buffer,BUFFER_SIZE);
+           printf("data read= %s =\n",buffer);
+           printf("count of data read= %d =\n",count);
       }
       else if (choice==0)
       {	
