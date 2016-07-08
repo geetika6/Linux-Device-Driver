@@ -5,14 +5,14 @@
 ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
 {  
     int i=0;
-    int notc,noctr,nocsr,oiq;
+    int notc,noctr,nocsr;
     size_t lsize;
     //void **arr;
     struct scull_dev *ldev;
     struct scull_sqset *lqset;
     int qset,quantum;
     //struct scull_sqset *sqset;
-    nocsr=oiq=0;
+    nocsr=0;
     //char desp[size]; 
     printk(KERN_INFO "Inside dev_read");
     ldev=NULL;
@@ -24,7 +24,7 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
          goto OUT;
     }
     lsize=ldev->datasize; 
-    noctr=lsize=lsize-(int)*loff;
+    noctr=lsize=size-(int)*loff;
     qset=ldev->qsetsize;
     quantum=ldev->quantumsize;
     lqset=ldev->sqset;
@@ -41,25 +41,20 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
     //after pointing private data to the ldev, we need to create pointer from source to destination for transer of data
     //for this we need to use copy_to_user
     //
-    i=(int)*loff/quantum;
-    printk(KERN_INFO "Inside dev_read value of i= %d",i);
-    oiq=(int)*loff % quantum;
-    printk(KERN_INFO "Inside dev_read value of oiq= %d",oiq);
+    i=loff/quantum;
+    oiq=loff % quantum;
     while (noctr)
     {
         if (i==(ldev->qsetsize))
         {
            lqset=lqset->next;
            i=0;
-    printk(KERN_INFO "Inside dev_read inside if ");
         }
-        if (noctr>=quantum)
+        if (noctr>quantum)
         {
             noctr=quantum ;
-             noctr = quantum-oiq;
         }
-        
-    printk(KERN_INFO "Inside dev_read value of nocsr= %d,i= %d,oiq= %d ,noctr= %d",nocsr,i,oiq,noctr);
+        notcr = quantum-oiq;
         notc=copy_to_user(ubuff+nocsr,lqset->data[i]+oiq,noctr);
        // printk(KERN_INFO "inside dev_read ,data =%s and ptr add  recieved = %p \n",(char*)*(ldev->sqset->data+i),*(ldev->sqset->data+i));
         if (notc)
@@ -70,8 +65,6 @@ ssize_t dev_read(struct file *filp,char __user *ubuff,size_t size,loff_t *loff)
         noctr=lsize - nocsr ;
         //if (nocsw== ldev->qsetsize *ldev->quantumsize)
         i++;
-        oiq=0;
-    printk(KERN_INFO "Inside dev_read again value of nocsr= %d,i= %d,oiq= %d ,noctr= %d",nocsr,i,oiq,noctr);
    } 
 
    return nocsr;
