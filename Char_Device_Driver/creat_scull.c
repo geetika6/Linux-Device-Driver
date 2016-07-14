@@ -49,5 +49,6 @@ struct scull_sqset * creat_scull(struct scull_dev *fdev,size_t size)
         printk(KERN_INFO "Inside creat_scull for loop ending ");
     }
     
+        printk(KERN_INFO "Inside creat_scull add for head=%p\n",head);
     return head;
 }

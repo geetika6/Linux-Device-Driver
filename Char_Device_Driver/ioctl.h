@@ -15,12 +15,16 @@
 #define GETNOREG _IOR(MAGIC_NO,2,int)
 #endif
 
+#ifndef GETDATASIZE
+#define GETDATASIZE _IOR(MAGIC_NO,3,int)
+#endif
+
 #ifndef SETREGSIZE
-#define SETREGSIZE _IOW(MAGIC_NO,3,int)
+#define SETREGSIZE _IOW(MAGIC_NO,4,int)
 #endif
 
 #ifndef SETNOREG
-#define SETNOREG _IOW(MAGIC_NO,4,int)
+#define SETNOREG _IOW(MAGIC_NO,5,int)
 #endif
 
 //we can also declare a struct with all these parameters togther and pass/extract that instead

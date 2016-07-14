@@ -11,6 +11,7 @@ loff_t dev_seek(struct file *filp,loff_t offset,int origin)
                  new_pos=offset;
                  break;
     case SEEK_CUR:
+                 printk(KERN_INFO "Inside lseek currt file pos=%d\n",(int)filp->f_pos);
                  new_pos=filp->f_pos+offset;
                  break;
     case SEEK_END:

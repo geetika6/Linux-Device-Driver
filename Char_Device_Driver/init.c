@@ -52,6 +52,8 @@ static int __init start_module(void)
          dev[i].quantumsize=quantumsize;
          printk(KERN_INFO "minor dev_id = %d",i);
          printk(KERN_INFO "add of dev[i] = %p",dev+i);
+         //init_MUTEX(&devices[i].sem);
+         sema_init(&dev[i].sem,1);
          err=cdev_add(&dev[i].cdev,dev_no,nod);
          if (err<0)
          {   

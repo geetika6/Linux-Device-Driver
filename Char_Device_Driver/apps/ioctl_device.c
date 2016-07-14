@@ -23,12 +23,17 @@ int ioctl_device(int choice)
                 printf("the no of reg in device = %d\n",arg);
                 break;
           case 4:
+                rfd=open(NODE,O_RDONLY);
+                ioctl(rfd,GETDATASIZE,&arg);
+                printf("the data in device in bytes = %d\n",arg);
+                break;
+          case 5:
                 wfd=open(NODE,O_WRONLY);
                 printf("enter the new reg size to be set\n");
                 scanf("%d",&arg);
                 ioctl(wfd,SETREGSIZE,&arg);
                 break;
-          case 5:
+          case 6:
                 wfd=open(NODE,O_WRONLY);
                 printf("enter the no of reg to be set\n");
                 scanf("%d\n",&arg);

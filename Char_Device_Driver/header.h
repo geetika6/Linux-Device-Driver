@@ -5,4 +5,6 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/slab.h>
+#include <linux/semaphore.h>
+#include <linux/mutex.h>
 MODULE_LICENSE("GPL");

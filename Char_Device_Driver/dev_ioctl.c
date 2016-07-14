@@ -28,6 +28,9 @@ long dev_ioctl(struct file *filp,unsigned int cmd,unsigned long arg)
         case GETNOREG:
              put_user(ldev->qsetsize,(int __user*)arg);
              break; 
+        case GETDATASIZE:
+             put_user(ldev->datasize,(int __user*)arg);
+             break; 
         case SETREGSIZE:
              printk(KERN_INFO "ioctl reg size =%d",ldev->quantumsize);
              get_user(ldev->quantumsize,(int __user *)arg);

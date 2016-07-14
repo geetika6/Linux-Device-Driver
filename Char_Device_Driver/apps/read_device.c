@@ -17,14 +17,14 @@ int read_device(int rfd)
           scanf("%d",&origin);
           fpos=seek_device(rfd,offset,origin);
           printf("final position= %d \n",fpos);
-           count=read(rfd,buffer,BUFFER_SIZE);
-           printf("data read= %s =\n",buffer);
-           printf("count of data read= %d =\n",count);
+           count=read(rfd,buffer,4*sizeof(char));
+           printf("data read=%s\n",buffer);
+           printf("count of data read= %d",count);
       }
       else if (choice==0)
       {	
            count=read(rfd,buffer,BUFFER_SIZE);
-           printf("data read= %s =\n",buffer);
+           printf("data read=%s\n",buffer);
            printf("count of data read= %d =\n",count);
       }
 
